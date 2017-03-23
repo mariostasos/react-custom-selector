@@ -1,6 +1,6 @@
 {
   "name": "react-custom-selector",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "react-custom-selector",
   "main": "lib/ReactSelector.js",
   "author": "mariostasos",

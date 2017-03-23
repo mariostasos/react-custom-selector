@@ -27,11 +27,11 @@ npm install react-custom-selector --save
 ## Usage
 Import the module in to your project
 ```
-let ReactSelector = require('react-custom-selector');
+let ReactCustomSelector = require('react-custom-selector');
 Or
-import ReactSelector from 'react-custom-selector';
+import ReactCustomSelector from 'react-custom-selector';
 and simply use it
-<ReactSelector
+<ReactCustomSelector
 	options={your_array}
 	placeholder={"Select One"}
 />
