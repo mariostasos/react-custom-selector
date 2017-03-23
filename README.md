@@ -60,7 +60,7 @@ provide an array and your custom props
 let array = ['Amiee','Everett','Senaida','Genaro','Elsa'];
 you can obtain the selected value from this.state.selected
 
-<ReactSelector
+<ReactCustomSelector
 	options={array}
 	placeholder={"Select One"}
 	selectValue={this.takeValue}
