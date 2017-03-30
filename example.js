@@ -1,10 +1,5 @@
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-	value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
@@ -20,79 +15,70 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var ReactCustomSelector = (function (_Component) {
-	_inherits(ReactCustomSelector, _Component);
+var ReactDOM = require('react-dom');
+var ReactCustomSelector = require('react-custom-selector');
 
-	function ReactCustomSelector(props) {
-		_classCallCheck(this, ReactCustomSelector);
+var App = (function (_Component) {
+	_inherits(App, _Component);
 
-		_get(Object.getPrototypeOf(ReactCustomSelector.prototype), 'constructor', this).call(this, props);
-		this.handleSelect = this.handleSelect.bind(this);
+	function App(props) {
+		_classCallCheck(this, App);
 
+		_get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
+		this.takeValue = this.takeValue.bind(this);
 		this.state = {
-			selected: null
+			selected: ''
 		};
 	}
 
-	_createClass(ReactCustomSelector, [{
-		key: 'handleSelect',
-		value: function handleSelect(e) {
+	_createClass(App, [{
+		key: 'takeValue',
+		value: function takeValue(selectValue) {
 			var self = this;
-			var selector_val = e.target.value;
-			self.setState({ selected: selector_val });
-
-			if (self.props.selectValue) {
-				self.props.selectValue(selector_val);
+			if (selectValue && (selectValue == undefined || selectValue == 0)) {
+				//do something
+				self.setState({ selected: '' });
+			} else if (selectValue) {
+				//do somethng else
+				self.setState({ selected: selectValue });
 			}
 		}
 	}, {
 		key: 'render',
 		value: function render() {
 			var self = this;
-
-			var classes = ['react-custom-selector', self.props.customClass];
-			classes = classes.join(' ');
-			var name = self.props.name ? self.props.name : null;
-			var placeholder = self.props.placeholder ? self.props.placeholder : null;
-			var noContentMsg = self.props.noContentMsg ? self.props.noContentMsg : 'No Content Found';
-			var options = self.props.options;
-
-			if (!Array.isArray(options)) {
-				console.log('Please provide an array');
-				return;
-			}
-
-			var dataMapped = options.map(function (item, index) {
-				return _react2['default'].createElement(
-					'option',
-					{ key: item || index, value: item || index },
-					item || index
-				);
-			});
-
-			if (options.length > 0) {
-				return _react2['default'].createElement(
-					'select',
-					_extends({ name: name, value: self.state.selected ? self.state.selected : '', ref: 'react-custom-selector', className: classes, onChange: self.handleSelect }, self.props),
-					_react2['default'].createElement(
-						'option',
-						{ key: '0', value: '0' },
-						placeholder
-					),
-					dataMapped ? dataMapped : null
-				);
-			} else {
-				return _react2['default'].createElement(
-					'div',
+			var arr = ['Amiee', 'Everett', 'Senaida', 'Genaro', 'Elsa'];
+			var showSelected = self.state.selected ? _react2['default'].createElement(
+				'div',
+				{ className: 'selectedContainer' },
+				_react2['default'].createElement(
+					'pre',
 					null,
-					noContentMsg
-				);
-			}
+					_react2['default'].createElement(
+						'code',
+						{ className: 'selectedValue' },
+						self.state.selected
+					)
+				)
+			) : '';
+
+			return _react2['default'].createElement(
+				'div',
+				null,
+				_react2['default'].createElement(ReactCustomSelector, {
+					options: arr,
+					placeholder: 'Select One',
+					selectValue: self.takeValue,
+					className: 'selector'
+				}),
+				showSelected
+			);
 		}
 	}]);
 
-	return ReactCustomSelector;
+	return App;
 })(_react.Component);
 
-exports['default'] = ReactCustomSelector;
-module.exports = exports['default'];
+ReactDOM.render(_react2['default'].createElement(App, null), document.getElementById('app'));
+
+},{"react":undefined,"react-custom-selector":undefined,"react-dom":undefined}]},{},[1]);
